@@ -69,7 +69,8 @@ public class Variable {
     /**
      * Retrieve the variable value from UPSD and store it in cache.
      * @return Variable value
-     * @throws IOException 
+     * @throws IOException IO Exception
+     * @throws NutException Nut Exception
      */
     public String getValue() throws IOException, NutException {
         if(device!=null && device.getClient()!=null)
@@ -84,7 +85,8 @@ public class Variable {
     /**
      * Retrieve the variable description from UPSD and store it in cache.
      * @return Variable description
-     * @throws IOException 
+     * @throws IOException IO Exception
+     * @throws NutException Nut Exception
      */
     public String getDescription() throws IOException, NutException {
         if(device!=null && device.getClient()!=null)
@@ -100,7 +102,8 @@ public class Variable {
      * Set the variable value.
      * Note the new value can be applied with a little delay depending of UPSD and connection.
      * @param value New value for the variable
-     * @throws IOException 
+     * @throws IOException IO Exception
+     * @throws NutException Nut Exception
      */
     public void setValue(String value) throws IOException, NutException {
         if(device!=null && device.getClient()!=null)

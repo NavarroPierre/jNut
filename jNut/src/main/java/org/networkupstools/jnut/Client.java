@@ -159,8 +159,10 @@ public class Client {
      * @param port IP port.
      * @param login Login to use to connect to UPSD.
      * @param passwd Password to use to connect to UPSD.
+     * @throws IOException IO Exception
+     * @throws NutException Nut Exception
      */
-    public Client(String host, int port, String login, String passwd) throws IOException, UnknownHostException, NutException
+    public Client(String host, int port, String login, String passwd) throws IOException, NutException
     {
         connect(host, port, login, passwd);
     }
@@ -172,8 +174,10 @@ public class Client {
      * @param port IP port.
      * @param login Login to use to connect to UPSD.
      * @param passwd Password to use to connect to UPSD.
+     * @throws IOException IO Exception
+     * @throws NutException Nut Exception
      */
-    public void connect(String host, int port, String login, String passwd) throws IOException, UnknownHostException, NutException
+    public void connect(String host, int port, String login, String passwd) throws IOException, NutException
     {
         this.host = host;
         this.port = port;
@@ -187,8 +191,10 @@ public class Client {
      * Throw an exception if cannot connect.
      * @param host Host to which connect.
      * @param port IP port.
+     * @throws IOException IO Exception
+     * @throws NutException Nut Exception
      */
-    public void connect(String host, int port) throws IOException, UnknownHostException, NutException
+    public void connect(String host, int port) throws IOException, NutException
     {
         this.host = host;
         this.port = port;
@@ -198,8 +204,10 @@ public class Client {
     /**
      * Connection to UPSD with already specified parameters.
      * Throw an exception if cannot connect.
+     * @throws IOException IO Exception
+     * @throws NutException Nut Exception
      */
-    public void connect() throws IOException, UnknownHostException, NutException
+    public void connect() throws IOException, NutException
     {
         // Force disconnect if another connection is alive.
         if(socket!=null)
@@ -213,10 +221,10 @@ public class Client {
     /**
      * Intend to authenticate with specified login and password, overriding 
      * already defined ones.
-     * @param login
-     * @param passwd
-     * @throws IOException
-     * @throws NutException 
+     * @param login Client login
+     * @param passwd Client password
+     * @throws IOException IO Exception
+     * @throws NutException Nut Exception
      */
     public void authenticate(String login, String passwd) throws IOException, NutException
     {
@@ -227,8 +235,8 @@ public class Client {
     
     /**
      * Intend to authenticate with alread set login and password.
-     * @throws IOException
-     * @throws NutException 
+     * @throws IOException IO Exception
+     * @throws NutException Nut Exception
      */
     public void authenticate() throws IOException, NutException
     {
@@ -310,8 +318,7 @@ public class Client {
     /**
      * Merge an array of stings into on string, with a space ' ' separator.
      * @param str First string to merge
-     * @param strings Additionnal strings to merge
-     * @param sep Separator.
+     * @param strings Additional strings to merge
      * @return The merged string, empty if no source string.
      */
     static String merge(String str, String[] strings)
@@ -419,7 +426,8 @@ public class Client {
      * @param query Query to send.
      * @param subquery Sub query to send.
      * @return The reply.
-     * @throws IOException 
+     * @throws IOException IO Exception
+     * @throws NutException Nut Exception
      */
     protected String query(String query, String subquery) throws IOException, NutException
     {
@@ -433,7 +441,8 @@ public class Client {
      * @param subquery Sub query to send.
      * @param params Optionnal additionnal parameters.
      * @return The reply.
-     * @throws IOException 
+     * @throws IOException IO Exception
+     * @throws NutException Nut Exception
      */
     protected String query(String query, String subquery, String[] params) throws IOException, NutException
     {
@@ -445,7 +454,8 @@ public class Client {
      * @param query Query to send.
      * @param params Optionnal additionnal parameters.
      * @return The reply.
-     * @throws IOException 
+     * @throws IOException IO Exception
+     * @throws NutException Nut Exception
      */
     protected String query(String query, String [] params) throws IOException, NutException
     {
@@ -457,7 +467,8 @@ public class Client {
      * Send a query line then read the response.
      * @param query Query to send.
      * @return The reply.
-     * @throws IOException 
+     * @throws IOException IO Exception
+     * @throws NutException Nut Exception
      */
     protected String query(String query) throws IOException, NutException
     {
@@ -475,7 +486,8 @@ public class Client {
      * @param subcmd GET subcommand to send.
      * @param param Extra parameters
      * @return GET result return by UPSD, without the subcommand and param prefix.
-     * @throws IOException 
+     * @throws IOException IO Exception
+     * @throws NutException Nut Exception
      */
     protected String get(String subcmd, String param) throws IOException, NutException
     {
@@ -488,7 +500,8 @@ public class Client {
      * @param subcmd GET subcommand to send.
      * @param params Eventual extra parameters.
      * @return GET result return by UPSD, without the subcommand and param prefix.
-     * @throws IOException 
+     * @throws IOException IO Exception
+     * @throws NutException Nut Exception
      */
     protected String get(String subcmd, String [] params) throws IOException, NutException
     {
@@ -515,7 +528,8 @@ public class Client {
      * Send a LIST query line then read replies and validate them.
      * @param subcmd LIST subcommand to send.
      * @return LIST results return by UPSD, without the subcommand and param prefix.
-     * @throws IOException 
+     * @throws IOException IO Exception
+     * @throws NutException Nut Exception
      */
     protected String[] list(String subcmd) throws IOException, NutException
     {
@@ -527,7 +541,8 @@ public class Client {
      * @param subcmd LIST subcommand to send.
      * @param param Extra parameters.
      * @return LIST results return by UPSD, without the subcommand and param prefix.
-     * @throws IOException 
+     * @throws IOException IO Exception
+     * @throws NutException Nut Exception
      */
     protected String[] list(String subcmd, String param) throws IOException, NutException
     {
@@ -540,7 +555,8 @@ public class Client {
      * @param subcmd LIST subcommand to send.
      * @param params Eventual extra parameters.
      * @return LIST results return by UPSD, without the subcommand and param prefix.
-     * @throws IOException 
+     * @throws IOException IO Exception
+     * @throws NutException Nut Exception
      */
     protected String[] list(String subcmd, String [] params) throws IOException, NutException
     {
@@ -577,7 +593,8 @@ public class Client {
      * Returns the list of available devices from the NUT server.
      * @return List of devices, empty if nothing,
      * null if not connected or failed.
-     * 
+     * @throws IOException IO Exception
+     * @throws NutException Nut Exception
      */
     public Device[] getDeviceList() throws IOException, NutException
     {
@@ -600,9 +617,9 @@ public class Client {
     /**
      * Intend to retrieve a device by its name.
      * @param name Name of the device to look at.
-     * @return Device 
-     * @throws IOException
-     * @throws NutException 
+     * @return Device
+     * @throws IOException IO Exception
+     * @throws NutException Nut Exception
      */
     public Device getDevice(String name)throws IOException, NutException
     {

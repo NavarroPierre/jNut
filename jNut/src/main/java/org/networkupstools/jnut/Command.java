@@ -69,7 +69,8 @@ public class Command {
     /**
      * Retrieve the command description from UPSD and store it in cache.
      * @return Command description
-     * @throws IOException 
+     * @throws IOException IO Exception
+     * @throws NutException Nut Exception
      */
     public String getDescription() throws IOException, NutException {
         if(device!=null && device.getClient()!=null)
@@ -83,7 +84,8 @@ public class Command {
 
     /**
      * Execute the instant command.
-     * @throws IOException 
+     * @throws IOException IO Exception
+     * @throws NutException Nut Exception
      */
     public void execute() throws IOException, NutException {
         if(device!=null && device.getClient()!=null)

@@ -59,10 +59,9 @@ class StringLineSocket {
      * Create a new line socket and connect it.
      * @param host Host to connect to
      * @param port Port to connect to
-     * @throws UnknownHostException
-     * @throws IOException 
+     * @throws IOException Exception on socket
      */
-    public StringLineSocket(String host, int port) throws UnknownHostException, IOException{
+    public StringLineSocket(String host, int port) throws IOException {
         connect(host, port);
     }
     
@@ -70,10 +69,9 @@ class StringLineSocket {
      * Connect a new line socket.
      * @param host Host to connect to
      * @param port Port to connect to
-     * @throws UnknownHostException
-     * @throws IOException 
+     * @throws IOException Exception on socket creation
      */
-    public void connect(String host, int port) throws UnknownHostException, IOException{
+    public void connect(String host, int port) throws IOException {
         socket = new Socket(host, port);
         if(socket!=null)
         {
@@ -108,7 +106,7 @@ class StringLineSocket {
     /**
      * Write a line follow by a '\n' character.
      * @param line 
-     * @throws IOException 
+     * @throws IOException Exception on write
      */
     public void write(String line) throws IOException
     {
@@ -122,7 +120,7 @@ class StringLineSocket {
     /**
      * Read a line terminated by a '\n'.
      * @return The line without the ending '\n'
-     * @throws IOException 
+     * @throws IOException Exception on read line
      */
     public String read() throws IOException
     {

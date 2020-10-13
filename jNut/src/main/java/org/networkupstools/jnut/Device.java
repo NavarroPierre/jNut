@@ -71,7 +71,8 @@ public class Device {
     /**
      * Retrieve the device description from UPSD and store it in cache.
      * @return Device description
-     * @throws IOException 
+     * @throws IOException IO Exception
+     * @throws NutException Nut Exception
      */
     public String getDescription() throws IOException, NutException {
         if(client!=null)
@@ -90,8 +91,8 @@ public class Device {
      * <p>
      * NOTE: You probably shouldn't send this command unless you are upsmon,
      * or a upsmon replacement.
-     * @throws IOException
-     * @throws NutException 
+     * @throws IOException IO Exception
+     * @throws NutException Nut Exception
      */
     public void login() throws IOException, NutException {
         if(client!=null)
@@ -108,8 +109,8 @@ public class Device {
     /**
      * This function doesn't do much by itself.  It is used by <i>upsmon</i> to make
      * sure that master-level functions like FSD are available if necessary
-     * @throws IOException
-     * @throws NutException 
+     * @throws IOException IO Exception
+     * @throws NutException Nut Exception
      */
     public void master() throws IOException, NutException {
         if(client!=null)
@@ -138,8 +139,8 @@ public class Device {
      * no way to clear it short of restarting upsd or dropping then re-adding
      * it in the ups.conf.  This may cause issues when upsd is running on a
      * system that is not shut down due to the UPS event.
-     * @throws IOException
-     * @throws NutException 
+     * @throws IOException IO Exception
+     * @throws NutException Nut Exception
      */
     public void setForcedShutdown() throws IOException, NutException {
         if(client!=null)
@@ -157,7 +158,8 @@ public class Device {
      * Return the number of clients which have done LOGIN for this UPS.
      * Force to retrieve it from UPSD and store it in cache.
      * @return Number of clients, -1 if error.
-     * @throws IOException 
+     * @throws IOException IO Exception
+     * @throws NutException Nut Exception
      */
     public int getNumLogin() throws IOException, NutException {
         if(client!=null)
@@ -173,7 +175,8 @@ public class Device {
      * Return the list of device variables from the NUT server.
      * @return List of variables, empty if nothing,
      * null if not connected or failed.
-     * @throws IOException 
+     * @throws IOException IO Exception
+     * @throws NutException Nut Exception
      */
     public Variable[] getVariableList() throws IOException, NutException {
         if(client==null)
@@ -199,7 +202,8 @@ public class Device {
      * Return the list of device RW variables from the NUT server.
      * @return List of variables, empty if nothing,
      * null if not connected or failed.
-     * @throws IOException 
+     * @throws IOException IO Exception
+     * @throws NutException Nut Exception
      */
     public Variable[] getRWVariableList() throws IOException, NutException {
         if(client==null)
@@ -225,8 +229,8 @@ public class Device {
      * Return a variable from its name.
      * @param name Name of the queried variable.
      * @return The corresponding variable object if exists.
-     * @throws IOException
-     * @throws NutException 
+     * @throws IOException IO Exception
+     * @throws NutException Nut Exception
      */
     public Variable getVariable(String name) throws IOException, NutException {
         if(client==null)
@@ -241,7 +245,8 @@ public class Device {
      * Return the list of device commands from the NUT server.
      * @return List of commands, empty if nothing,
      * null if not connected or failed.
-     * @throws IOException 
+     * @throws IOException IO Exception
+     * @throws NutException Nut Exception
      */
     public Command[] getCommandList() throws IOException, NutException {
         if(client==null)
@@ -263,8 +268,8 @@ public class Device {
      * Return a command from its name.
      * @param name Name of the queried command.
      * @return The corresponding command object if exists.
-     * @throws IOException
-     * @throws NutException 
+     * @throws IOException IO Exception
+     * @throws NutException Nut Exception
      */
     public Command getCommand(String name)throws IOException, NutException {
         if(client==null)

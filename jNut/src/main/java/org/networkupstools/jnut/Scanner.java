@@ -243,7 +243,7 @@ public class Scanner {
 
     /**
      * Set the scanner extra parameters.
-     * @param map Map of parameters.
+     * @param config Map of parameters.
      */
     public void setConfig(Map config) {
         this.config = config;
@@ -315,7 +315,7 @@ public class Scanner {
      * Execute the scan.
      * @return Array of found DiscoveredDevice, null if a problem occurs,
      * empty if no one found.
-     * @throws IOException
+     * @throws IOException IO Exception
      */
     public DiscoveredDevice[] scan() throws IOException {
         // Launch the scanner in a slave process and parse the stdout result.
@@ -355,7 +355,7 @@ public class Scanner {
      * @param process Process of nut-scanner.
      * @return Array of found DiscoveredDevice, null if a problem occurs,
      * empty if no one found
-     * @throws IOException
+     * @throws IOException IO Exception
      */
     DiscoveredDevice[] processScanResult(Process process) throws IOException {
         List/*<DiscoveredDevice>*/ list = new ArrayList/*<DiscoveredDevice>*/();
