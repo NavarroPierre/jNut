@@ -629,4 +629,14 @@ public class Client {
         }
         return new Device(name, this);
     }
+
+    /**
+     * Create a device by its name, no ckeck to server.
+     *
+     * @param name Name of the device to look at.
+     * @return Device
+     */
+    public Device createDevice(String name) {
+        return new Device(name, this);
+    }
 }

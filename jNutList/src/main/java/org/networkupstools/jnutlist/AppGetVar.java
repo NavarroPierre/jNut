@@ -27,7 +27,7 @@ public class AppGetVar {
     public static void main(String[] args) {
         System.setProperty("log4j.rootLogger", "DEBUG");
 
-        String host = args.length >= 1 ? args[0] : "10.130.34.119";
+        String host = args.length >= 1 ? args[0] : "127.0.0.1";
         int port = args.length >= 2 ? Integer.valueOf(args[1]).intValue() : 3493;
         String login = args.length >= 3 ? args[2] : "";
         String pass = args.length >= 4 ? args[3] : "";
@@ -43,14 +43,15 @@ public class AppGetVar {
             client.setPasswd(pass);
 
             client.connect();
-            System.out.println("getDevice");
-            Device device = client.getDevice("ups-7");
             System.out.println("getVariable");
-            Variable variable = device.getVariable("device.model");
-            System.out.println("getValue");
+            Variable variable = client.getDevice("ups-1").getVariable("device.model");
             String value = variable.getValue();
             System.out.println("value: ".concat(value));
 
+            System.out.println("getVariable 2");
+            variable = client.createDevice("ups-1").getVariable("device.model");
+            value = variable.getValue();
+            System.out.println("value: ".concat(value));
         } catch (Exception e) {
             e.printStackTrace();
         }
