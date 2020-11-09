@@ -18,6 +18,9 @@
 */
 package org.networkupstools.jnut;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -47,6 +50,8 @@ import java.util.ArrayList;
  * @author <a href="mailto:EmilienKia@eaton.com">Emilien Kia</a>
  */
 public class Client {
+
+    private static final Logger logger = LoggerFactory.getLogger(Client.class);
 
     /**
      * Host to which connect.
@@ -479,8 +484,10 @@ public class Client {
         if (socket == null || !socket.isConnected()) {
             return null;
         }
+        logger.debug("Query write: {}", query);
         socket.write(query);
         String res = socket.read();
+        logger.debug("Query read : {}", res);
         if (res == null) {
             return null;
         }
