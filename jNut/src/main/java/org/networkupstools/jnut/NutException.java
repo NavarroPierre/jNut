@@ -30,50 +30,45 @@ package org.networkupstools.jnut;
  * A Nut exception has a (standard java exception message) message which correspond
  * to error code returns by UPSD (like 'ACCESS-DENIED', 'UNKNOWN-UPS' ...).
  * An extra string embed a more descriptive english message.
- * 
+ *
  * @author <a href="mailto:EmilienKia@eaton.com">Emilien Kia</a>
  */
-public class NutException extends java.lang.Exception{
+public class NutException extends java.lang.Exception {
 
     public static String UnknownResponse = "UNKNOWN-RESPONSE";
-    
+
     public static String DriverNotConnected = "DRIVER-NOT-CONNECTED";
-    
+
     public String extra = "";
 
-    public NutException()
-    {
+    public NutException() {
     }
-    
-    public NutException(String message)
-    {
+
+    public NutException(String message) {
         super(message);
     }
 
-    public NutException(String message, String extra)
-    {
+    public NutException(String message, String extra) {
         super(message);
         this.extra = extra;
     }
 
-    public NutException(Throwable cause)
-    {
+    public NutException(Throwable cause) {
         super(cause);
     }
-    
-    public NutException(String message, Throwable cause)
-    {
+
+    public NutException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public NutException(String message, String extra, Throwable cause)
-    {
+    public NutException(String message, String extra, Throwable cause) {
         super(message, cause);
         this.extra = extra;
     }
 
     /**
      * Returns the extra message.
+     *
      * @return Extra message if any.
      */
     public String getExtra() {
@@ -82,23 +77,26 @@ public class NutException extends java.lang.Exception{
 
     /**
      * Set the extra message.
+     *
      * @param extra The new extra message.
      */
     public void setExtra(String extra) {
         this.extra = extra;
     }
-    
+
     /**
      * Test is the exception corresponds to the specified name.
+     *
      * @param name Name to test
      * @return True if exception corresponds.
      */
     public boolean is(String name) {
-        return getMessage()!=null&&getMessage().equals(name);
+        return getMessage() != null && getMessage().equals(name);
     }
 
     /**
      * Format an exception message.
+     *
      * @return Exception message
      */
     public String toString() {

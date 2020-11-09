@@ -25,7 +25,7 @@ import java.io.IOException;
  * <p>
  * It can be used to retrieve description and execute commands.
  * A Command object can be retrieved from Device instance and can not be constructed directly.
- * 
+ *
  * @author <a href="mailto:EmilienKia@eaton.com">Emilien Kia</a>
  */
 public class Command {
@@ -41,25 +41,27 @@ public class Command {
 
     /**
      * Internally create a command.
-     * @param name Command name.
+     *
+     * @param name   Command name.
      * @param device Device to which the command is attached.
      */
-    protected Command(String name, Device device)
-    {
+    protected Command(String name, Device device) {
         this.device = device;
-        this.name   = name;
+        this.name = name;
     }
-    
+
     /**
      * Return the device to which the command can be executed.
+     *
      * @return Attached device.
      */
     public Device getDevice() {
         return device;
     }
-    
+
     /**
      * Return the command name.
+     *
      * @return Command name.
      */
     public String getName() {
@@ -68,32 +70,31 @@ public class Command {
 
     /**
      * Retrieve the command description from UPSD and store it in cache.
+     *
      * @return Command description
-     * @throws IOException IO Exception
+     * @throws IOException  IO Exception
      * @throws NutException Nut Exception
      */
     public String getDescription() throws IOException, NutException {
-        if(device!=null && device.getClient()!=null)
-        {
+        if (device != null && device.getClient() != null) {
             String[] params = {device.getName(), name};
             String res = device.getClient().get("CMDDESC", params);
-            return res!=null?Client.extractDoublequotedValue(res):null;
+            return res != null ? Client.extractDoublequotedValue(res) : null;
         }
         return null;
     }
 
     /**
      * Execute the instant command.
-     * @throws IOException IO Exception
+     *
+     * @throws IOException  IO Exception
      * @throws NutException Nut Exception
      */
     public void execute() throws IOException, NutException {
-        if(device!=null && device.getClient()!=null)
-        {
+        if (device != null && device.getClient() != null) {
             String[] params = {device.getName(), name};
             String res = device.getClient().query("INSTCMD", params);
-            if(!res.equals("OK"))
-            {
+            if (!res.equals("OK")) {
                 // Normaly response should be OK or ERR and nothing else.
                 throw new NutException(NutException.UnknownResponse, "Unknown response in Command.execute : " + res);
             }

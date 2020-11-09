@@ -23,40 +23,40 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
 /**
  * Class representing a socket, internally used to communicate with UPSD.
  * Abstract some stream mechanisms.
- * 
+ *
  * @author <a href="mailto:EmilienKia@eaton.com">Emilien Kia</a>
  */
 class StringLineSocket {
-    
+
     /**
      * Real internal TCP socket.
      */
     Socket socket = null;
-    
+
     /**
      * Writer to the socket.
      */
     private OutputStreamWriter writer = null;
-    
+
     /**
      * Reader from the socket.
      */
-    private BufferedReader reader = null;    
-    
+    private BufferedReader reader = null;
+
     /**
      * Create a new line socket.
      */
-    public StringLineSocket(){
-        
+    public StringLineSocket() {
+
     }
-    
+
     /**
      * Create a new line socket and connect it.
+     *
      * @param host Host to connect to
      * @param port Port to connect to
      * @throws IOException Exception on socket
@@ -64,28 +64,28 @@ class StringLineSocket {
     public StringLineSocket(String host, int port) throws IOException {
         connect(host, port);
     }
-    
+
     /**
      * Connect a new line socket.
+     *
      * @param host Host to connect to
      * @param port Port to connect to
      * @throws IOException Exception on socket creation
      */
     public void connect(String host, int port) throws IOException {
         socket = new Socket(host, port);
-        if(socket!=null)
-        {
+        if (socket != null) {
             reader = new BufferedReader(new InputStreamReader(
                     socket.getInputStream()));
             writer = new OutputStreamWriter(socket.getOutputStream());
         }
     }
-    
+
     /**
      * Close the socket.
      */
-    public void close() throws IOException{
-        if(socket!=null){
+    public void close() throws IOException {
+        if (socket != null) {
             writer.close();
             reader.close();
             socket.close();
@@ -94,42 +94,46 @@ class StringLineSocket {
             reader = null;
         }
     }
-    
+
     /**
-     * Test if the soecket is connected.
+     * Test if the socket is connected.
+     *
      * @return True if connected.
      */
     public boolean isConnected() {
-        return socket!=null && socket.isConnected() && !socket.isClosed();
+        return socket != null && socket.isConnected() && !socket.isClosed();
     }
-    
+
     /**
      * Write a line follow by a '\n' character.
-     * @param line 
+     *
+     * @param line
      * @throws IOException Exception on write
      */
-    public void write(String line) throws IOException
-    {
-        if(isConnected())
-        {
+    public void write(String line) throws IOException {
+        if (isConnected()) {
             writer.write(line + "\n");
             writer.flush();
+        } else {
+            System.err.println("Not connected (write)");
         }
     }
-    
+
     /**
      * Read a line terminated by a '\n'.
+     *
      * @return The line without the ending '\n'
      * @throws IOException Exception on read line
      */
-    public String read() throws IOException
-    {
-        if(isConnected())
-        {
-            String res = reader.readLine();
-            return res;
+    public String read() throws IOException {
+        String res = "";
+        if (isConnected()) {
+            res = reader.readLine();
+        } else {
+            System.err.println("Not connected (read)");
         }
-        return "";
+
+        return res;
     }
 
 }

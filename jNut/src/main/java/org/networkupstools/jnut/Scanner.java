@@ -33,7 +33,7 @@ import java.util.Set;
 /**
  * jNut scanner.
  * Wrap calls to nut-scanner in java.
- *
+ * <p>
  * Just, instantiate it, set options and nut-scanner path, then scan.
  * <pre>
  * Scanner scanner = new Scanner();
@@ -72,6 +72,7 @@ public class Scanner {
 
     /**
      * Result of a scan.
+     *
      * @see Scanner#scan()
      * Used to retrieve informations about devices found by a scan and
      * their properties
@@ -84,7 +85,8 @@ public class Scanner {
         /**
          * Constructor.
          * Can not be used by others than Scanner.
-         * @param drv Driver
+         *
+         * @param drv   Driver
          * @param props Extra properties
          */
         DiscoveredDevice(String drv, Map props) {
@@ -96,6 +98,7 @@ public class Scanner {
 
         /**
          * Retrieve the name of driver used by device.
+         *
          * @return Driver name
          */
         public String getDriver() {
@@ -104,6 +107,7 @@ public class Scanner {
 
         /**
          * Retrieve the map of device properties.
+         *
          * @return Device property map
          */
         public Map/*<String,String>*/ getProperties() {
@@ -112,6 +116,7 @@ public class Scanner {
 
         /**
          * Retrieve a device property if exists.
+         *
          * @param name Name of the property to retrieve.
          * @return Property value or null if not set.
          */
@@ -121,6 +126,7 @@ public class Scanner {
 
         /**
          * Test if the device has a property.
+         *
          * @param name Name of the property.
          * @return True if the property is set.
          */
@@ -152,23 +158,27 @@ public class Scanner {
     static final String PARAM_SNMPv3_PRIVACY_PASSWORD = "-X";
     static final String PARAM_NUT_UPSD_PORT = "-p";
     static final String[] PARAM_COUPLE_DEFINITION = {
-        OPTION_TIMEOUT, PARAM_TIMEOUT,
-        OPTION_START_IP, PARAM_START_IP,
-        OPTION_END_IP, PARAM_END_IP,
-        OPTION_MASK_CIDR, PARAM_MASK_CIDR,
-        OPTION_SNMPv1_COMMUNITY, PARAM_SNMPv1_COMMUNITY,
-        OPTION_SNMPv3_SECURITY_LEVEL, PARAM_SNMPv3_SECURITY_LEVEL,
-        OPTION_SNMPv3_SECURITY_NAME, PARAM_SNMPv3_SECURITY_NAME,
-        OPTION_SNMPv3_AUTHENTICATION_PROTOCOL, PARAM_SNMPv3_AUTHENTICATION_PROTOCOL,
-        OPTION_SNMPv3_AUTHENTICATION_PASSWORD, PARAM_SNMPv3_AUTHENTICATION_PASSWORD,
-        OPTION_SNMPv3_PRIVACY_PROTOCOL, PARAM_SNMPv3_PRIVACY_PROTOCOL,
-        OPTION_SNMPv3_PRIVACY_PASSWORD, PARAM_SNMPv3_PRIVACY_PASSWORD,
-        OPTION_NUT_UPSD_PORT, PARAM_NUT_UPSD_PORT
+            OPTION_TIMEOUT, PARAM_TIMEOUT,
+            OPTION_START_IP, PARAM_START_IP,
+            OPTION_END_IP, PARAM_END_IP,
+            OPTION_MASK_CIDR, PARAM_MASK_CIDR,
+            OPTION_SNMPv1_COMMUNITY, PARAM_SNMPv1_COMMUNITY,
+            OPTION_SNMPv3_SECURITY_LEVEL, PARAM_SNMPv3_SECURITY_LEVEL,
+            OPTION_SNMPv3_SECURITY_NAME, PARAM_SNMPv3_SECURITY_NAME,
+            OPTION_SNMPv3_AUTHENTICATION_PROTOCOL, PARAM_SNMPv3_AUTHENTICATION_PROTOCOL,
+            OPTION_SNMPv3_AUTHENTICATION_PASSWORD, PARAM_SNMPv3_AUTHENTICATION_PASSWORD,
+            OPTION_SNMPv3_PRIVACY_PROTOCOL, PARAM_SNMPv3_PRIVACY_PROTOCOL,
+            OPTION_SNMPv3_PRIVACY_PASSWORD, PARAM_SNMPv3_PRIVACY_PASSWORD,
+            OPTION_NUT_UPSD_PORT, PARAM_NUT_UPSD_PORT
     };
 
-    /** Type of scan, union of SCAN_* flags. */
+    /**
+     * Type of scan, union of SCAN_* flags.
+     */
     int scanType = SCAN_COMPLETE;
-    /** Map of scan parameters. */
+    /**
+     * Map of scan parameters.
+     */
     Map/*<String,String>*/ config = null;
 
     /**
@@ -180,6 +190,7 @@ public class Scanner {
     /**
      * Constructor with device types.
      * Construct a scanner object with specifying what type of scan to do.
+     *
      * @param scanType Type of scan, union of SCAN_* flags.
      */
     public Scanner(int scanType) {
@@ -190,8 +201,9 @@ public class Scanner {
      * Constructor with device types and scan parameters.
      * Construct a scanner object with specifying what type of scan to do and
      * extra scan parameters.
+     *
      * @param scanType Type of scan, union of SCAN_* flags.
-     * @param config Map of extra parameters, names are OPTION_*.
+     * @param config   Map of extra parameters, names are OPTION_*.
      */
     public Scanner(int scanType, Map/*<String,String>*/ config) {
         this.scanType = scanType;
@@ -201,14 +213,16 @@ public class Scanner {
     /**
      * Retrieve nut-scanner executable name (with location if any).
      * Default to "nut-scanner".
+     *
      * @return nut-scanner executable name
      */
     public String getExecName() {
-        return config!=null?(String)config.get(OPTION_SCANNER_EXEC):null;
+        return config != null ? (String) config.get(OPTION_SCANNER_EXEC) : null;
     }
 
     /**
      * Set nut-scanner executable name (with location if any).
+     *
      * @param value nut-scanner executable name
      */
     public void setExecName(String value) {
@@ -218,15 +232,17 @@ public class Scanner {
     /**
      * Retrieve nut-scanner executable path.
      * The directory in which nut-scanner will be launched.
+     *
      * @return nut-scanner executable path
      */
     public String getExecPath() {
-        return config!=null?(String)config.get(OPTION_SCANNER_PATH):null;
+        return config != null ? (String) config.get(OPTION_SCANNER_PATH) : null;
     }
 
     /**
      * Set nut-scanner executable path.
      * The directory in which nut-scanner will be launched.
+     *
      * @param value nut-scanner executable path
      */
     public void setExecPath(String value) {
@@ -235,6 +251,7 @@ public class Scanner {
 
     /**
      * Retrieve scanner extra parameters like snmp community name or passwords.
+     *
      * @return Map of parameters.
      */
     public Map getConfig() {
@@ -243,6 +260,7 @@ public class Scanner {
 
     /**
      * Set the scanner extra parameters.
+     *
      * @param config Map of parameters.
      */
     public void setConfig(Map config) {
@@ -251,7 +269,8 @@ public class Scanner {
 
     /**
      * Set a scanner extra parameter.
-     * @param name Name of the parameter.
+     *
+     * @param name  Name of the parameter.
      * @param value Value of the parameter.
      */
     public void setParam(String name, String value) {
@@ -263,6 +282,7 @@ public class Scanner {
 
     /**
      * Remove a scanner extra parameter.
+     *
      * @param name Name of the parameter to remove.
      */
     public void removeParam(String name) {
@@ -273,30 +293,33 @@ public class Scanner {
 
     /**
      * Retrieve a scanner extra parameter.
+     *
      * @param name Name of the parameter.
      * @return Value of the parameter, null if not found.
      */
     public String getParam(String name) {
         if (config == null) {
-            return (String)config.get(name);
+            return (String) config.get(name);
         }
         return null;
     }
 
     /**
      * Test if a scanner has an extra parameter.
+     *
      * @param name Name of the parameter.
      * @return True if the scanner has the parameter set.
      */
     public boolean hasParam(String name) {
         if (config == null) {
-            return config.get(name)!=null;
+            return config.get(name) != null;
         }
         return false;
     }
 
     /**
      * Retrieve the scan type.
+     *
      * @return Union of SCAN_* flags.
      */
     public int getScanType() {
@@ -305,6 +328,7 @@ public class Scanner {
 
     /**
      * Set the scan type.
+     *
      * @param scanType Union of SCAN_* flags.
      */
     public void setScanType(int scanType) {
@@ -313,6 +337,7 @@ public class Scanner {
 
     /**
      * Execute the scan.
+     *
      * @return Array of found DiscoveredDevice, null if a problem occurs,
      * empty if no one found.
      * @throws IOException IO Exception
@@ -340,10 +365,10 @@ public class Scanner {
         }
         if (process != null) {
             DiscoveredDevice[] res = processScanResult(process);
-            try{
-                if(process.exitValue()==0)
+            try {
+                if (process.exitValue() == 0)
                     return res;
-            }catch(IllegalThreadStateException e){
+            } catch (IllegalThreadStateException e) {
                 return res;
             }
         }
@@ -352,6 +377,7 @@ public class Scanner {
 
     /**
      * Parse the result produced by the nut-scanner process and return it.
+     *
      * @param process Process of nut-scanner.
      * @return Array of found DiscoveredDevice, null if a problem occurs,
      * empty if no one found
@@ -373,6 +399,7 @@ public class Scanner {
 
     /**
      * Parse a line of result from nut-scanner and convert it to DiscoveredDevice.
+     *
      * @param line Line of nut-scanner result.
      * @return The corresponding DiscoveredDevice, or null if a problem occurs.
      */
@@ -409,7 +436,7 @@ public class Scanner {
                             key = temp;
                             temp = "";
                             state = 1;
-                        }else{
+                        } else {
                             // Bad format
                             return null;
                         }
@@ -417,7 +444,7 @@ public class Scanner {
                         // Find the ',' key/value separator (no value, key only)
                         conf.put(temp, null);
                         temp = "";
-                    }else{
+                    } else {
                         // Bad format
                         return null;
                     }
@@ -522,6 +549,7 @@ public class Scanner {
     /**
      * Generate an array of String representing command arguments to pass to
      * nut-scanner, when launching it.
+     *
      * @return Array of String of command arguments.
      */
     String[] generateCommandParameters() {
