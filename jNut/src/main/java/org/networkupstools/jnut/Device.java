@@ -235,9 +235,7 @@ public class Device {
     public Variable getVariable(String name) throws IOException, NutException {
         if(client==null)
             return null;
-        
-        String[] params = {this.name, name};
-        client.get("VAR", params);
+
         return new Variable(name, this);
     }
     
